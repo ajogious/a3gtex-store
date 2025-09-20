@@ -38,8 +38,7 @@ export default function ComingSoon() {
             <input
               type="email"
               placeholder="Your email address"
-              className="flex-grow px-4 py-3 rounded-sm border focus:outline-none focus:ring-1 text-sm"
-              style={{ borderColor: "#dce3d0", focusRingColor: "#9cb17b" }}
+              className="flex-grow px-4 py-3 rounded-sm border border-[#dce3d0] focus:outline-none focus:ring-1 focus:ring-[#9cb17b] text-sm"
             />
             <button
               className="px-5 py-3 rounded-sm text-sm font-medium text-white hover:opacity-90 transition-opacity"
