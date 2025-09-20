@@ -27,8 +27,9 @@ export default function ComingSoon() {
           Our New Collection is Arriving Soon
         </h2>
         <p className="text-gray-600 mb-10 leading-relaxed">
-          We're putting the finishing touches on our exclusive new collection.
-          Sign up below to be the first to know when we launch.
+          {
+            "We're putting the finishing touches on our exclusive new collection. Sign up below to be the first to know when we launch."
+          }
         </p>
 
         {/* Email signup form */}
