@@ -9,6 +9,7 @@ const Header = () => {
   return (
     <header className="w-full border-b">
       <div className="wrapper flex-between">
+        {/* Left: Logo + Name */}
         <div className="flex-start">
           <Link href="/" className="flex-start">
             <Image
@@ -18,21 +19,30 @@ const Header = () => {
               width={30}
               priority={true}
             />
-            <span className="hidden lg:block font-bold text-2xl ml-1">
+            {/* Hide brand name on small screens */}
+            <span className="hidden md:block font-bold text-xl lg:text-2xl ml-1">
               {APP_NAME}
             </span>
           </Link>
         </div>
-        <div className="space-x-2">
+
+        {/* Right: Actions */}
+        <div className="flex items-center space-x-2">
           <ModeToggle />
-          <Button asChild variant="ghost">
-            <Link href="/cart">
-              <ShoppingCart /> Cart
+
+          {/* Cart button: show icon only on mobile */}
+          <Button asChild variant="ghost" className="p-2 sm:px-4">
+            <Link href="/cart" className="flex items-center gap-1">
+              <ShoppingCart className="h-5 w-5" />
+              <span className="hidden sm:inline">Cart</span>
             </Link>
           </Button>
-          <Button asChild>
-            <Link href="/sign-in">
-              <UserIcon /> Sign In
+
+          {/* Sign in button: full width text on md+, icon-only on mobile */}
+          <Button asChild className="p-2 sm:px-4">
+            <Link href="/sign-in" className="flex items-center gap-1">
+              <UserIcon className="h-5 w-5" />
+              <span className="hidden sm:inline">Sign In</span>
             </Link>
           </Button>
         </div>

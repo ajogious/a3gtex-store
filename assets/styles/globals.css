@@ -4,7 +4,7 @@
 
 @layer utilities {
   .wrapper {
-    @apply max-w-5xl lg:mx-auto p-3 md:px-10 w-full;
+    @apply max-w-6xl lg:mx-auto p-3 md:px-10 w-full;
   }
 
   .flex-start {

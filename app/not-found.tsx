@@ -9,20 +9,23 @@ const NotFoundPage = () => {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <Image
-        src="/images/logo.svg"
-        width={48}
-        height={48}
-        alt={`${APP_NAME} logo`}
-        priority={true}
-      />
-      <div className="p-6 w-1/3 rounded-lg shadow-md text-center">
-        <h1 className="text-3xl font-bold mb-4">Not Found</h1>
-        <p className="text-destructive">Could not find requested page</p>
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-50">
+      <div className="flex flex-col items-center justify-center flex-grow w-full max-w-sm p-6 rounded-2xl shadow-lg text-center bg-white overflow-auto">
+        <Image
+          src="/images/logo.svg"
+          width={56}
+          height={56}
+          alt={`${APP_NAME} logo`}
+          priority={true}
+          className="mb-6"
+        />
+        <h1 className="text-2xl sm:text-3xl font-bold mb-3">Not Found</h1>
+        <p className="text-sm sm:text-base text-destructive mb-6 break-words">
+          Could not find the requested page.
+        </p>
         <Button
           variant="outline"
-          className="mt-4 ml-2"
+          className="w-full sm:w-auto"
           onClick={() => router.push("/")}
         >
           Back To Home
