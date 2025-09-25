@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Product } from "@/types";
 import ProductCard from "./product-card";
 
 const ProductList = ({
@@ -6,7 +6,7 @@ const ProductList = ({
   title,
   limit,
 }: {
-  data: any;
+  data: Product[];
   title?: string;
   limit?: number;
 }) => {
@@ -26,13 +26,8 @@ const ProductList = ({
           justify-items-center
         "
         >
-          {limitedData.map((product: any) => (
-            <ProductCard
-              key={product.slug}
-              product={product}
-              // Example: constrain card width for cleaner centering
-              className="w-full max-w-xs"
-            />
+          {limitedData.map((product: Product) => (
+            <ProductCard key={product.slug} product={product} />
           ))}
         </div>
       ) : (

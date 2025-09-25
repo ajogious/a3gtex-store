@@ -1,4 +1,3 @@
-// app/loading.tsx
 import Image from "next/image";
 import loader from "@/assets/loader.gif";
 

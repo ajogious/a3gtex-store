@@ -10,7 +10,7 @@ const NotFoundPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-50">
-      <div className="flex flex-col items-center justify-center flex-grow w-full max-w-sm p-6 rounded-2xl shadow-lg text-center bg-white overflow-auto">
+      <div className="flex flex-col items-center justify-center w-full max-w-sm p-6 rounded-2xl shadow-lg text-center bg-white overflow-auto">
         <Image
           src="/images/logo.svg"
           width={56}
