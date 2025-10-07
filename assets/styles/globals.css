@@ -4,7 +4,7 @@
 
 @layer utilities {
   .wrapper {
-    @apply max-w-6xl lg:mx-auto p-3 md:px-10 w-full;
+    @apply max-w-7xl lg:mx-auto p-5 md:px-10 w-full;
   }
 
   .flex-start {
@@ -102,7 +102,11 @@
   }
 }
 
-.container-custom {
-  width: 86%;
-  margin: auto;
+/* Uploadthing button text override */
+html.dark .upload-field .text-white {
+  color: #ffffff !important;
+}
+
+.upload-field .text-white {
+  color: #000 !important;
 }

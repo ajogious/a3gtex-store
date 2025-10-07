@@ -1,9 +1,17 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  typescript: {
-    ignoreBuildErrors: true, // work on this later
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'utfs.io', // old host (still valid for some uploads)
+      },
+      {
+        protocol: 'https',
+        hostname: '**.ufs.sh', // new UploadThing host
+      },
+    ],
   },
 };
 
