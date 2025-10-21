@@ -17,22 +17,22 @@ A full-featured e-commerce website built with Next.js, TypeScript, PostgreSQL, a
 
 - Product catalog with search, filtering, and pagination
 - Shopping cart with persistent storage
-- Wishlist functionality
 - Product reviews and ratings system
-- Multiple product images with zoom capability
-- Featured products with promotional banners
+- Multiple product images
 
 ### Payment & Checkout
 
 - Paystack integration for card payments
 - Flutterwave payment gateway support
+- PayPal
+- Stripe
 - Cash on delivery option
 - Secure checkout process
 - Order tracking and history
 
 ### Admin Dashboard
 
-- Sales analytics with interactive charts (Recharts)
+- Sales analytics with charts (Recharts)
 - Product management (CRUD operations)
 - Order management and fulfillment tracking
 - User management system
@@ -92,7 +92,7 @@ npm install --legacy-peer-deps
 
 ### 3. Environment Configuration
 
-Rename `.example-env` to `.env` and configure the following:
+Rename `.example-env.txt` to `.env` and configure the following:
 
 #### Database
 
@@ -120,13 +120,31 @@ openssl rand -base64 32
 ```env
 PAYSTACK_PUBLIC_KEY="pk_test_your_public_key"
 PAYSTACK_SECRET_KEY="sk_test_your_secret_key"
+PAYSTACK_CALLBACK_URL="http://localhost:3000/api/paystack/callback"
 ```
 
 **Flutterwave:**
 
 ```env
-FLUTTERWAVE_PUBLIC_KEY="FLWPUBK_TEST_your_public_key"
-FLUTTERWAVE_SECRET_KEY="FLWSECK_TEST_your_secret_key"
+FLW_CLIENT_ID="FLWCLI_TEST_your_public_key"
+FLW_CLIENT_SECRET="FLWCLI_TEST_your_secret_keyX"
+FLW_ENCRYPTION_KEY="FLWSECK_TESTKEY"
+FLW_CALLBACK_URL="http://localhost:3000/api/flutterwave/callback"
+```
+
+**Stripe Payment Gateway**
+
+```env
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=""
+STRIPE_SECRET_KEY=""
+```
+
+**PayPal Payment Gateway**
+
+```env
+PAYPAL_API_URL="https://api-m.sandbox.paypal.com"
+PAYPAL_CLIENT_ID=""
+PAYPAL_APP_SECRET=""
 ```
 
 #### File Upload (Uploadthing)
@@ -140,8 +158,14 @@ UPLOADTHING_APPID="your_uploadthing_app_id"
 #### Email (Resend)
 
 ```env
-RESEND_API_KEY="re_your_resend_api_key"
+RESEND_API_KEY=""
+SENDER_EMAIL="onboarding@resend.dev"
+ADMIN_EMAIL="admin any email ID"
 ```
+
+### Exchanges for money conversion
+
+EXCHANGE_API_KEY="......................."
 
 ### 4. Database Setup
 
@@ -227,6 +251,18 @@ npx prisma migrate dev
 1. Sign up at Flutterwave
 2. Obtain your API keys from the settings
 3. Set up webhook endpoints for payment callbacks
+
+### Stripe Configuration
+
+1. Create a Stripe account
+2. Get your test API keys from the Developers → API Keys section
+3. Set up webhooks for payment verification under Developers → Webhooks
+
+### PayPal Configuration
+
+1. Create a PayPal Developer account at developer.paypal.com
+2. Get your Client ID and Client Secret from the My Apps & Credentials page
+3. Set up webhooks for payment notifications under My Apps & Credentials → Webhooks
 
 ### File Upload
 

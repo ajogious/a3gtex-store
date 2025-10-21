@@ -37,14 +37,14 @@ PAYPAL_CLIENT_ID=""
 PAYPAL_APP_SECRET=""
 
 # File Upload (Uploadthing)
-UPLOADTHING_TOKEN=""
-UPLOADTHING_SECRET=""
-UPLOADTHING_APPID=""
+UPLOADTHING_TOKEN="your_uploadthing_token"
+UPLOADTHING_SECRET="your_uploadthing_secret"
+UPLOADTHING_APPID="your_uploadthing_app_id"
 
 # Email Service (Resend)
 RESEND_API_KEY=""
 SENDER_EMAIL="onboarding@resend.dev"
-ADMIN_EMAIL=""
+ADMIN_EMAIL="admin any email ID"
 
 # Exchanges for money conversion
 EXCHANGE_API_KEY="......................."
