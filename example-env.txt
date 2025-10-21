@@ -1,0 +1,50 @@
+# App Configuration
+NEXT_PUBLIC_APP_NAME="A3TEX"
+NEXT_PUBLIC_APP_DESCRIPTION="A modern ecommerce store built with Next.js"
+NEXT_PUBLIC_SERVER_URL="http://localhost:3000"
+
+# Database
+DATABASE_URL="postgresql://username:password@host:port/dbname"
+
+# Authentication (NextAuth.js)
+# Generate with: openssl rand -base64 32
+NEXTAUTH_SECRET=""
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_URL_INTERNAL="http://localhost:3000"
+
+# Payment Methods Configuration
+PAYMENT_METHODS="Paystack, Flutterwave, CashOnDelivery"
+DEFAULT_PAYMENT_METHOD="Paystack"
+
+# Paystack Payment Gateway
+PAYSTACK_PUBLIC_KEY="pk_test_your_public_key"
+PAYSTACK_SECRET_KEY="sk_test_your_secret_key"
+PAYSTACK_CALLBACK_URL="http://localhost:3000/api/paystack/callback"
+
+# Flutterwave Payment Gateway
+FLW_CLIENT_ID="FLWCLI_TEST_your_public_key"
+FLW_CLIENT_SECRET="FLWCLI_TEST_your_secret_keyX"
+FLW_ENCRYPTION_KEY="FLWSECK_TEST254b0a7e8b2b"
+FLW_CALLBACK_URL="http://localhost:3000/api/flutterwave/callback"
+
+# Stripe Payment Gateway
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=""
+STRIPE_SECRET_KEY=""
+
+# PayPal Payment Gateway
+PAYPAL_API_URL="https://api-m.sandbox.paypal.com"
+PAYPAL_CLIENT_ID=""
+PAYPAL_APP_SECRET=""
+
+# File Upload (Uploadthing)
+UPLOADTHING_TOKEN=""
+UPLOADTHING_SECRET=""
+UPLOADTHING_APPID=""
+
+# Email Service (Resend)
+RESEND_API_KEY=""
+SENDER_EMAIL="onboarding@resend.dev"
+ADMIN_EMAIL=""
+
+# Exchanges for money conversion
+EXCHANGE_API_KEY="......................."

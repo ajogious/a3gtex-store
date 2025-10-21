@@ -17,7 +17,7 @@ import { Order } from '@/types';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
-import { useState, useTransition } from 'react';
+import { useTransition, useState } from 'react';
 import {
   PayPalButtons,
   PayPalScriptProvider,
@@ -97,7 +97,6 @@ const OrderDetailsTable = ({
     });
   };
 
-  // Button to mark order as paid
   const MarkAsPaidButton = () => {
     const [isPending, startTransition] = useTransition();
     const { toast } = useToast();
@@ -121,7 +120,6 @@ const OrderDetailsTable = ({
     );
   };
 
-  // Button to mark order as delivered
   const MarkAsDeliveredButton = () => {
     const [isPending, startTransition] = useTransition();
     const { toast } = useToast();
@@ -202,7 +200,7 @@ const OrderDetailsTable = ({
                     <TableRow key={item.slug}>
                       <TableCell>
                         <Link
-                          href={`/product/{item.slug}`}
+                          href={`/product/${item.slug}`}
                           className='flex items-center'
                         >
                           <Image
@@ -253,10 +251,14 @@ const OrderDetailsTable = ({
                 </div>
               )}
 
-              {/* PayPal Payment */}
               {!isPaid && paymentMethod === 'PayPal' && (
                 <div>
-                  <PayPalScriptProvider options={{ clientId: paypalClientId }}>
+                  <PayPalScriptProvider
+                    options={{
+                      clientId: paypalClientId,
+                      disableFunding: 'card',
+                    }}
+                  >
                     <PrintLoadingState />
                     <PayPalButtons
                       createOrder={handleCreatePayPalOrder}
@@ -266,7 +268,6 @@ const OrderDetailsTable = ({
                 </div>
               )}
 
-              {/* Stripe Payment */}
               {!isPaid && paymentMethod === 'Stripe' && stripeClientSecret && (
                 <StripePayment
                   priceInCents={Number(order.totalPrice) * 100}
@@ -275,7 +276,6 @@ const OrderDetailsTable = ({
                 />
               )}
 
-              {/* Paystack Payment */}
               {!isPaid && paymentMethod === 'Paystack' && (
                 <Button
                   disabled={loadingPaystack}
@@ -306,7 +306,6 @@ const OrderDetailsTable = ({
                 </Button>
               )}
 
-              {/* Flutterwave Payment */}
               {!isPaid && paymentMethod === 'Flutterwave' && (
                 <Button
                   disabled={loadingFlutterwave}
@@ -337,7 +336,6 @@ const OrderDetailsTable = ({
                 </Button>
               )}
 
-              {/* Cash On Delivery */}
               {isAdmin && !isPaid && paymentMethod === 'CashOnDelivery' && (
                 <MarkAsPaidButton />
               )}

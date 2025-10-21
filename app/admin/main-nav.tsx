@@ -4,8 +4,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import { Menu as MenuIcon } from 'lucide-react';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
 const links = [
   { title: 'Overview', href: '/admin/overview' },
@@ -53,6 +60,7 @@ const MainNav = ({
               <span className='sr-only'>Open Menu</span>
             </Button>
           </SheetTrigger>
+
           <SheetContent
             side='left'
             className='flex flex-col gap-6 p-6 bg-background'
@@ -62,6 +70,13 @@ const MainNav = ({
               touchAction: 'pan-y',
             }}
           >
+            {/* ✅ Add hidden title for accessibility */}
+            <SheetHeader>
+              <VisuallyHidden>
+                <SheetTitle>Navigation Menu</SheetTitle>
+              </VisuallyHidden>
+            </SheetHeader>
+
             <nav className='flex flex-col space-y-3'>
               {links.map((link) => (
                 <Link

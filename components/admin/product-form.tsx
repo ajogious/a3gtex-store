@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { productDefaultValues } from '@/lib/constants';
 import { insertProductSchema, updateProductSchema } from '@/lib/validators';
@@ -81,6 +82,7 @@ const ProductForm = ({
 }) => {
   const router = useRouter();
   const { toast } = useToast();
+  const tempUploads = useRef<string[]>([]); // 🔹 store temporary uploaded URLs
 
   const form = useForm<z.infer<typeof insertProductSchema>>({
     resolver:
@@ -91,6 +93,40 @@ const ProductForm = ({
       product && type === 'Update' ? product : productDefaultValues,
   });
 
+  // =========================================================
+  // 🔹 CLEANUP: Delete temporary uploads if user leaves page
+  // =========================================================
+  useEffect(() => {
+    const cleanupUploads = async () => {
+      if (type === 'Create' && tempUploads.current.length > 0) {
+        await Promise.all(
+          tempUploads.current.map(async (url) => {
+            await fetch('/api/uploadthing/delete', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ url }),
+            });
+          })
+        );
+      }
+    };
+
+    // Browser refresh/close
+    const handleBeforeUnload = () => {
+      cleanupUploads();
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // React navigation
+    return () => {
+      cleanupUploads();
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [type]);
+
+  // =========================================================
+  // 🔹 SUBMIT HANDLER
+  // =========================================================
   const onSubmit: SubmitHandler<z.infer<typeof insertProductSchema>> = async (
     values
   ) => {
@@ -100,6 +136,7 @@ const ProductForm = ({
         toast({ variant: 'destructive', description: res.message });
       } else {
         toast({ description: res.message });
+        tempUploads.current = []; // ✅ clear temp uploads on success
         router.push('/admin/products');
       }
     }
@@ -120,11 +157,11 @@ const ProductForm = ({
     }
   };
 
-  // 🔹 Delete for multiple product images
-  // 🔹 Delete for multiple product images
+  // =========================================================
+  // 🔹 DELETE IMAGE HANDLERS
+  // =========================================================
   const handleDeleteImage = async (imageUrl: string) => {
     try {
-      // ✅ Only delete from UploadThing in "create" mode
       if (type === 'Create') {
         const response = await fetch('/api/uploadthing/delete', {
           method: 'POST',
@@ -135,13 +172,15 @@ const ProductForm = ({
         if (!result.success) throw new Error(result.message);
       }
 
-      // ✅ Always update form state (UI only)
       const currentImages = form.getValues('images');
       form.setValue(
         'images',
         currentImages.filter((img: string) => img !== imageUrl)
       );
 
+      tempUploads.current = tempUploads.current.filter(
+        (url) => url !== imageUrl
+      ); // ✅ remove from temp list
       toast({ description: 'Image removed (will apply after saving)' });
     } catch (error) {
       console.error('Error deleting image:', error);
@@ -153,7 +192,6 @@ const ProductForm = ({
     }
   };
 
-  // 🔹 Delete for single banner image
   const handleDeleteBanner = async (bannerUrl: string) => {
     try {
       if (type === 'Create') {
@@ -166,9 +204,10 @@ const ProductForm = ({
         if (!result.success) throw new Error(result.message);
       }
 
-      // ✅ Only update form state here
       form.setValue('banner', '');
-
+      tempUploads.current = tempUploads.current.filter(
+        (url) => url !== bannerUrl
+      ); // ✅ remove from temp list
       toast({ description: 'Banner removed (will apply after saving)' });
     } catch (error) {
       console.error('Error deleting banner:', error);
@@ -180,10 +219,16 @@ const ProductForm = ({
     }
   };
 
+  // =========================================================
+  // 🔹 WATCH FORM FIELDS
+  // =========================================================
   const images = form.watch('images');
   const isFeatured = form.watch('isFeatured');
   const banner = form.watch('banner');
 
+  // =========================================================
+  // 🔹 UI
+  // =========================================================
   return (
     <Form {...form}>
       <form
@@ -191,8 +236,8 @@ const ProductForm = ({
         onSubmit={form.handleSubmit(onSubmit)}
         className='space-y-8'
       >
+        {/* ======================= NAME + SLUG ======================= */}
         <div className='flex flex-col md:flex-row gap-5'>
-          {/* Name */}
           <FormField
             control={form.control}
             name='name'
@@ -207,7 +252,6 @@ const ProductForm = ({
             )}
           />
 
-          {/* Slug */}
           <FormField
             control={form.control}
             name='slug'
@@ -220,12 +264,12 @@ const ProductForm = ({
                     <Button
                       type='button'
                       className='bg-gray-500 hover:bg-gray-600 text-white px-4 py-1 mt-2'
-                      onClick={() => {
+                      onClick={() =>
                         form.setValue(
                           'slug',
                           slugify(form.getValues('name'), { lower: true })
-                        );
-                      }}
+                        )
+                      }
                     >
                       Generate
                     </Button>
@@ -237,8 +281,8 @@ const ProductForm = ({
           />
         </div>
 
+        {/* ======================= CATEGORY + BRAND ======================= */}
         <div className='flex flex-col md:flex-row gap-5'>
-          {/* Category */}
           <FormField
             control={form.control}
             name='category'
@@ -253,7 +297,6 @@ const ProductForm = ({
             )}
           />
 
-          {/* Brand */}
           <FormField
             control={form.control}
             name='brand'
@@ -269,8 +312,8 @@ const ProductForm = ({
           />
         </div>
 
+        {/* ======================= PRICE + STOCK ======================= */}
         <div className='flex flex-col md:flex-row gap-5'>
-          {/* Price */}
           <FormField
             control={form.control}
             name='price'
@@ -285,7 +328,6 @@ const ProductForm = ({
             )}
           />
 
-          {/* Stock */}
           <FormField
             control={form.control}
             name='stock'
@@ -301,7 +343,7 @@ const ProductForm = ({
           />
         </div>
 
-        {/* Product Images */}
+        {/* ======================= PRODUCT IMAGES ======================= */}
         <div className='upload-field flex flex-col md:flex-row gap-5'>
           <FormField
             control={form.control}
@@ -348,7 +390,9 @@ const ProductForm = ({
                           }
                           onClientUploadComplete={(res) => {
                             if (!res || res.length === 0) return;
-                            form.setValue('images', [...images, res[0].ufsUrl]);
+                            const uploadedUrl = res[0].ufsUrl;
+                            form.setValue('images', [...images, uploadedUrl]);
+                            tempUploads.current.push(uploadedUrl); // ✅ track temp upload
                           }}
                           onUploadError={(error: Error) => {
                             toast({
@@ -366,7 +410,8 @@ const ProductForm = ({
             )}
           />
         </div>
-        {/* Featured / Banner */}
+
+        {/* ======================= FEATURED + BANNER ======================= */}
         <div className='upload-field'>
           Featured Product
           <Card>
@@ -417,12 +462,17 @@ const ProductForm = ({
                       endpoint='bannerUploader'
                       onBeforeUploadBegin={(files) =>
                         validateImage(files, 100, 1920, 560, (msg) =>
-                          toast({ variant: 'destructive', description: msg })
+                          toast({
+                            variant: 'destructive',
+                            description: msg,
+                          })
                         )
                       }
                       onClientUploadComplete={(res) => {
                         if (!res || res.length === 0) return;
-                        form.setValue('banner', res[0].ufsUrl); // ✅ correct
+                        const uploadedUrl = res[0].ufsUrl;
+                        form.setValue('banner', uploadedUrl);
+                        tempUploads.current.push(uploadedUrl); // ✅ track temp upload
                       }}
                       onUploadError={(error: Error) => {
                         toast({
@@ -438,7 +488,7 @@ const ProductForm = ({
           </Card>
         </div>
 
-        {/* Description */}
+        {/* ======================= DESCRIPTION ======================= */}
         <div>
           <FormField
             control={form.control}
@@ -459,7 +509,7 @@ const ProductForm = ({
           />
         </div>
 
-        {/* Submit */}
+        {/* ======================= SUBMIT ======================= */}
         <div>
           <Button
             type='submit'
