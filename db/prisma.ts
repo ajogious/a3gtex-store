@@ -14,7 +14,6 @@ const pool = new Pool({ connectionString });
 const adapter = new PrismaNeon(pool);
 
 // Extends the PrismaClient with a custom result transformer to convert the price and rating fields to strings.
-// @ts-expect-error adapter is a valid runtime property
 export const prisma = new PrismaClient({ adapter }).$extends({
   result: {
     product: {

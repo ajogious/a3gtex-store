@@ -1,20 +1,14 @@
 const sampleData = {
   users: [
     {
-      name: 'Adeola Johnson',
+      name: 'John Doe',
       email: 'admin@example.com',
       password: '123456',
       role: 'admin',
     },
     {
-      name: 'Chinedu Okoro',
+      name: 'Jane Doe',
       email: 'user@example.com',
-      password: '123456',
-      role: 'user',
-    },
-    {
-      name: 'Funke Adebayo',
-      email: 'funke@example.com',
       password: '123456',
       role: 'user',
     },
@@ -44,8 +38,8 @@ const sampleData = {
       category: "Men's Fashion",
       description: 'Elegant embroidered kaftan for special occasions',
       images: [
-        '/images/sample-products/agbada-1.jpg',
-        '/images/sample-products/agbada-2.jpg',
+        '/images/sample-products/agbada-1.webp',
+        '/images/sample-products/agbada-2.webp',
       ],
       price: 45000,
       brand: 'Royal Attire',
@@ -89,7 +83,7 @@ const sampleData = {
       numReviews: 42,
       stock: 12,
       isFeatured: true,
-      banner: '/images/banners/womens-fashion-banner.jpg',
+      banner: '/images/banners/womens-fashion-banner.webp',
     },
     {
       name: 'Designer Buba and Skirt',
@@ -97,8 +91,8 @@ const sampleData = {
       category: "Women's Fashion",
       description: 'Handcrafted Nigerian traditional outfit',
       images: [
-        '/images/sample-products/buba-skirt-1.jpg',
-        '/images/sample-products/buba-skirt-2.jpg',
+        '/images/sample-products/buba-skirt-1.webp',
+        '/images/sample-products/buba-skirt-2.webp',
       ],
       price: 32000,
       brand: 'Yoruba Classic',
@@ -114,8 +108,8 @@ const sampleData = {
       category: "Women's Fashion",
       description: 'Contemporary Ankara design for everyday wear',
       images: [
-        '/images/sample-products/ankara-dress-1.jpg',
-        '/images/sample-products/ankara-dress-2.jpg',
+        '/images/sample-products/ankara-dress-1.webp',
+        '/images/sample-products/ankara-dress-2.webp',
       ],
       price: 15000,
       brand: 'Afro Chic',
@@ -142,7 +136,7 @@ const sampleData = {
       numReviews: 89,
       stock: 15,
       isFeatured: true,
-      banner: '/images/banners/electronics-banner.jpg',
+      banner: '/images/banners/electronics-banner.webp',
     },
     {
       name: 'Infinix Hot 30i',
@@ -239,8 +233,8 @@ const sampleData = {
       category: 'Baby Products',
       description: 'Beautiful Nigerian traditional outfit for baby dedication',
       images: [
-        '/images/sample-products/christening-outfit-1.jpg',
-        '/images/sample-products/christening-outfit-2.jpg',
+        '/images/sample-products/christening-outfit-1.webp',
+        '/images/sample-products/christening-outfit-2.webp',
       ],
       price: 12000,
       brand: 'Little Angels',

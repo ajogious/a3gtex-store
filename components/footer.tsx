@@ -89,32 +89,19 @@ const Footer = () => {
               </Link>
             </div>
             <p className='mt-6 text-sm leading-relaxed'>
-              We are your go-to online boutique, where you see and meet
-              timeless, classic, trendy, innovative, creative, and elegant
-              styles of fashion.
-              <br />
-              <br />
-              We specialize in offering classic, neutral unisex clothing and
-              accessories alongside the latest trends.
-              <br />
-              <br />
-              Fashion has always been our passion. We started Olivine&apos;s
-              Fashion Boutique with the zeal of meeting people’s expectations,
-              making them feel confident, unique, beautiful, cute, and
-              comfortable in their own skin. Our collections are handpicked for
-              effortless style, helping you dress up or down while discovering
-              your favorite outfits.
-              <br />
-              <br />
-              Our journey began in Baltimore, MD, later expanding to Africa
-              (Nigeria to be precise), and now we are worldwide.{' '}
-              <span className='italic'>“Glory be to God”</span>.
-              <br />
-              <br />
-              We are grateful to have you as our customer. Thanks for choosing
-              Olivine&apos;s Fashion Boutique for your wardrobe essentials and
-              for supporting our unique business. We look forward to helping you
-              discover more about your unique style.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
+              asperiores dignissimos, fugit incidunt sequi tenetur, accusamus
+              maiores quisquam repellat officia quia non nulla aliquam modi
+              molestiae delectus magnam a illum! lorem20
+            </p>
+            <p className='mt-6 text-sm leading-relaxed'>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos,
+              consectetur?
+            </p>
+            <p className='mt-6 text-sm leading-relaxed'>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos,
+              consectetur? Lorem ipsum dolor, sit amet consectetur adipisicing
+              elit. Itaque, quaerat?
             </p>
           </div>
 
@@ -153,15 +140,7 @@ const Footer = () => {
               <h2 className='font-medium text-gray-900 mb-5'>Get in touch</h2>
               <div className='text-sm space-y-2'>
                 <Link
-                  href='https://wa.me/2348146581941'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='hover:text-orange-600 transition block'
-                >
-                  +2348146581941
-                </Link>
-                <Link
-                  href='https://wa.me/2347081512250'
+                  href='https://wa.me/2348132925207'
                   target='_blank'
                   rel='noopener noreferrer'
                   className='hover:text-orange-600 transition block'
@@ -169,10 +148,10 @@ const Footer = () => {
                   +2347081512250
                 </Link>
                 <Link
-                  href='mailto:Kingsleyokolie49@gmail.com'
+                  href='mailto:a3globaltechsolutions@gmail.com'
                   className='hover:text-orange-600 transition block'
                 >
-                  Kingsleyokolie49@gmail.com
+                  a3globaltechsolutions@gmail.com
                 </Link>
               </div>
             </div>

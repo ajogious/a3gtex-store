@@ -2,16 +2,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-/**
- * Expects these image files in:
- * public/images/deals-products/
- * - deal-1.png
- * - deal-2.png
- * - deal-3.png
- * - deal-4.png
- * - deal-5.png
- * - redirect_icon.svg (for the button icon)
- */
 const DealCountdown = () => {
   return (
     <div className='my-20'>

@@ -105,6 +105,7 @@ CREATE TABLE "Order" (
     "isDelivered" BOOLEAN NOT NULL DEFAULT false,
     "deliveredAt" TIMESTAMP(6),
     "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "usdTotal" DECIMAL(12,2) NOT NULL DEFAULT 0.00,
 
     CONSTRAINT "Order_pkey" PRIMARY KEY ("id")
 );
