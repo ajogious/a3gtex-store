@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     default: APP_NAME,
   },
   description: APP_DESCRIPTION,
-  metadataBase: new URL(SERVER_URL || 'https://a3gtex-store.vercel.app'),
+  metadataBase: new URL(SERVER_URL),
 };
 
 export default function RootLayout({
